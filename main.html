@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Confronto cunsumi</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.1/dist/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+	<style>
+		#chart-container {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+			width: 1000px;
+			height: 1000px;
+		}
+	</style>
+</head>
+<body>
+    <header style="margin-left: 35%; font-size: large;">Confronto di alcuni dati per produrre 1 kg di 5 oli diversi</header>
+	<div id="chart-container" style="width: 90vw; border: 1px solid black; height: 90vh;">
+		<canvas id="myChart" style="padding: 3%;"></canvas>  
+	</div>
+
+	<script>
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var myChart = new Chart(ctx, {
+		    type: 'bar',
+		    data: {
+		        labels: ["Olio di girasole", "Olio d'oliva", "Olio di colza", "Olio di soia", "Olio di Palma"],
+		        datasets: [{
+		            label: 'Emissioni di CO2 per produrre 1 kg (kg)',
+		            data: [3.596, 5.419, 3.837, 3.147, 7.319],
+		            backgroundColor: 'rgba(255, 0, 0, 0.4)',
+		            borderColor: 'rgba(255, 0, 0, 1)',
+		            borderWidth: 1,
+		            yAxisID: 'y1'
+		        }, {
+		            label: 'Consumo di acqua per produrre 1 kg (L)',
+		            data: [1007.9, 2141.8, 237.7, 414.6, 6.4],
+		            backgroundColor: 'rgba(0, 255, 0, 0.4)',
+		            borderColor: 'rgba(0, 255, 0, 1)',
+		            borderWidth: 1,
+		            yAxisID: 'y2'
+		        }, {
+		            label: 'Utilizzo di terra per produrre 1 kg (mq)',
+		            data: [17.66, 26.31, 10.63, 10.52, 2.42],
+		            backgroundColor: 'rgba(0, 0, 255, 0.4)',
+		            borderColor: 'rgba(0, 0, 255, 1)',
+		            borderWidth: 1,
+		            yAxisID: 'y3'
+		        }]
+		    },
+		    options: {
+		        scales: {
+		            y1: {
+		                type: 'linear',
+		                position: 'left',
+		                ticks: {
+		                    beginAtZero: true,
+		                    color: 'red'
+		                },
+		                grid: {
+		                    color: 'rgba(255, 0, 0, 0.4)'
+		                },
+		                title: {
+		                    display: true,
+		                    text: 'Emissioni di CO2 (kg)',
+		                    color: 'red'
+		                },
+                        afterDataLimits(scale) {
+	                        scale.max += 10;
+	                    },
+		            },
+		            y2: {
+		                type: 'linear',
+		                position: 'right',
+		                ticks: {
+		                    beginAtZero: true,
+		                    color: 'green'
+		                },
+		                grid: {
+		                    color: 'rgba(0, 255, 0, 0.4)'
+		                },
+		                title: {
+		                    display: true,
+		                    text: 'Consumo di acqua (L)',
+		                    color: 'green'
+		                },
+                        afterDataLimits(scale) {
+	                        scale.max += 10;
+	                    }
+		            },
+		            y3: {
+		                type: 'linear',
+		                position: 'right',
+		                ticks: {
+		                    beginAtZero: true,
+		                    color: 'blue'
+		                },
+		                grid: {
+		                    color: 'rgba(0, 0, 255, 0.4)'
+		                },
+		                title: {
+		                    display: true,
+		                    text: 'Utilizzo di terra (mq)',
+		                    color: 'blue'
+		                },
+                        afterDataLimits(scale) {
+	                        scale.max += 10;
+	                    },
+		            }
+		        }
+		    }
+		});
+	</script>
+</body>
+</html>
